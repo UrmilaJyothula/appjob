@@ -1,0 +1,62 @@
+var response1 = [
+   {"id" : 1, "name" : "accommodation", "prerequisites" : [ {"id":1,"name":"Apartment/Flat"}, {"id":2,"name":"House"}]},
+   {"id" : 2, "name" : "vehicle", "prerequisites" : [{"id" : 3,"name" : "Boat"},{"id" : 4,"name" : "Truck"}]}
+];
+
+var response2 = [
+   {
+      "id" : 1,
+      "name" : "accommodation",
+      "prerequisites" : [
+         {"id" : 1,"name" : "Apartment/Flat"},
+         {"id" : 2,"name" : "House"}
+      ]
+   },
+   {
+      "id" : 2,
+      "name" : "vehicle",
+      "prerequisites" : [
+         {"id" : 3,"name" : "Boat"},
+         {"id" : 4,"name" : "Truck"},
+         {"prerequisites" : [{"id" : 5,"name" : "Yacht"},{"id" : 7,"name" : "Volvo"}]}
+      ]
+   }
+];
+
+// Searches for a key in an object
+function searchKey_in_an_object (object, key_name) {
+   var results = [];
+   for (var i = 0; i < object.length; i++) {
+      for (var key in object[i]) {
+
+         var value = object[i][key];
+         if (key === key_name) {
+
+            if (typeof(value) === "Array" || typeof(value) === "object") {
+               for (var k = 0; k < value.length; k++) {
+                  results.push(value[k]);
+               }
+            }
+            else {
+               results.push(value);
+            }
+
+         }
+
+         if (typeof(value) === "object") {
+            var child_results = searchKey_in_an_object(value, key_name);
+            if (child_results.length > 0) {
+               for (var j = 0; j < child_results.length; j++) {
+                  results.push(child_results[j]);
+               }
+            }
+         }
+
+      }
+   }
+   return results;
+}
+
+console.log(searchKey_in_an_object(response1, "prerequisites"));
+console.log(searchKey_in_an_object(response2, "prerequisites"));
+console.log(searchKey_in_an_object(response2, "id"));
