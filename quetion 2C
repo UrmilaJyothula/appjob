@@ -1,0 +1,12 @@
+var toArray = function(obj) {
+    var _arr = [];
+
+    for (var key in obj) {
+        _arr.push([key, obj[key]]);
+    }
+    return _arr;
+}
+
+console.log(toArray({ a: 1, b: 2 }));
+console.log(toArray({ dogs: 5, cats: 2 }));
+console.log(toArray({}));
