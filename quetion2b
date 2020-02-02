@@ -1,0 +1,15 @@
+// Validates the number enter
+function validateNumberInput (number) {
+   var length = number.toString().length;
+   if (length > 5) return false;
+   /* RE for validating a number */
+   return  /^\d+$/.test(number);
+}
+
+console.log(validateNumberInput(767821));
+console.log(validateNumberInput(76781));
+console.log(validateNumberInput("7678"));
+console.log(validateNumberInput("767821a"));
+console.log(validateNumberInput("76 7821"));
+console.log(validateNumberInput("767859644"));
+
